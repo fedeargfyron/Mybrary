@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 
-const path = require('path')
-const coverImageBasePath = 'uploads/bookCovers'
 //Declaro mi clase con schema
 const bookSchema = new mongoose.Schema({
     title: {
@@ -24,7 +22,11 @@ const bookSchema = new mongoose.Schema({
         required: true,
         default: Date.now
     },
-    coverImageName:{
+    coverImage:{
+        type: Buffer,
+        required: true
+    },
+    coverImageType: {
         type: String,
         required: true
     },
@@ -37,16 +39,11 @@ const bookSchema = new mongoose.Schema({
 //Me permite crear un atributo virtual, actua igual pero saca su valor
 //desde los atributos del objeto
 bookSchema.virtual('coverImagePath').get(function(){
-    if(this.coverImageName != null){
-        //Aca devuelvo el valor de el archivo que está dentro de
-        //Public/bookcover/imagen
-        return path.join('/', coverImageBasePath, this.coverImageName)
+    if(this.coverImage != null && this.coverImageType != null){
+        return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
     }
 })
 //Con este export, gracias a mongoose.model basicamente
 //estoy creando una tabla llamada 'Author' que va a ser
 //definida con el esquema que le pasemos
 module.exports = mongoose.model('Book', bookSchema)
-//De esta manera exporto una named variable
-module.exports.coverImageBasePath = coverImageBasePath
-//9:21 del video
