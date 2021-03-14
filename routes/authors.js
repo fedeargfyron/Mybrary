@@ -41,19 +41,5 @@ router.post('/', async (req, res) =>{
             errorMessage: 'Error creating author'
         })
     }
-    /*
-    author.save((err, newAuthor) =>{
-        if(err){
-            res.render('authors/new', {
-                author: author,
-                errorMessage: 'Error creating author'
-            })
-        }
-        else{
-            //res.redirect(`authors/${newAuthor.id}`)
-            res.redirect(`authors`)
-        }
-    })*/
-    //Solicito el nombre del form y lo envio al server
 })
 module.exports = router;
