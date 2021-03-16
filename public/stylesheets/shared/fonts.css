@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Redressed';
+    src: url('Redressed-Regular.woff2') format('woff2'),
+        url('Redressed-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
